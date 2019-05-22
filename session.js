@@ -25,7 +25,12 @@ passport.deserializeUser(function(user, done) {
 
 module.exports = {
   passport: passport,
-  check: expressJwt({ secret: process.env.JWT_SECRET }),
+  check: function(req, res) {
+    if (req.user)
+      next()
+    else
+      res.sendStatus(401)
+  },
   google_login: passport.authenticate('google', { scope: ['profile'] }),
   google_callback: passport.authenticate('google', { failureRedirect: 'https://wishlist-quasar.netlify.com' }),
   generateToken(user) {
