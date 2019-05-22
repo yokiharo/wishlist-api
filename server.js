@@ -25,18 +25,13 @@ app.get('/', function(req, res) {
 app.get('/auth/google', session.google_login);
 
 app.get('/auth/google/callback', session.google_callback, function(req, res) {
-	console.log('user cb');
-	console.log(req.user);
-	res.redirect('https://wishlist-quasar.netlify.com');
-});
-
-app.get('/token', session.check, function(req, res) {
 	req.token = session.generateToken(req.user);
-	res.json({
-		token: req.token,
-		user: req.user
-	});
-})
+	// res.json({
+	// 	token: req.token,
+	// 	user: req.user
+	// });
+	res.redirect('https://wishlist-quasar.netlify.com/?token=' + req.token);
+});
 
 app.get('/me', session.check, function(req, res) {
   res.json(req.user);
