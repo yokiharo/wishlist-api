@@ -13,4 +13,4 @@ app.get('/', function(req, res) {
 	res.send(process.env.SECRET);
 });
 
-app.listen(3000);
+app.listen(process.env.port || 3000);
