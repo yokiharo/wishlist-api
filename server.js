@@ -37,4 +37,9 @@ app.get('/me', session.check, function(req, res) {
   res.json(req.user);
 });
 
+app.get('/logout', function (req, res) {
+	req.logout();
+	res.redirect('https://wishlist-quasar.netlify.com');
+})
+
 app.listen(process.env.PORT || 3000);
