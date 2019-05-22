@@ -26,6 +26,8 @@ passport.deserializeUser(function(user, done) {
 module.exports = {
   passport: passport,
   check: function(req, res) {
+    console.log('user');
+    console.log(req.user);
     if (req.user)
       next()
     else
