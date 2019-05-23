@@ -4,6 +4,8 @@ API for the simple wishlist app made with [Quasar Framework](https://quasar-fram
 
 You can try it [here](https://wishlist-quasar.netlify.com).
 
+You can find the app [here](https://github.com/yokiharo/wishlist).
+
 Feel free to contribute to the app!
 
 ### Quick Start
