@@ -34,16 +34,14 @@ app.get('/auth/google/callback', session.google_callback, function(req, res) {
 	res.redirect('https://wishlist-quasar.netlify.com/?token=' + req.token);
 })
 
-app.get('/load', session.check, function(req, res) {
-  res.json({ user: req.user, user_list: list.findOne({ id: req.user.id }) }); // TO DO: ADD ITEMS FROM DB IN RESPONSE
+app.get('/load', session.check, async function(req, res) {
+  res.json({ user: req.user, user_list: await list.findOne({ id: req.user.id }) });
 })
 
-app.post('/save', session.check, function(req, res) {
+app.post('/save', session.check, async function(req, res) {
 	const new_list = new list({ id: req.user.id, items: req.body.items });
-	list.findOneAndUpdate({ id: req.user.id }, new_list, { upsert: true }).then(function() {
-		res.sendStatus(200);
-	})
-	// TO DO: SAVE ITEMS TO DB FOR THIS USER (req.body.items)
+	await list.findOneAndUpdate({ id: req.user.id }, new_list, { upsert: true });
+	res.sendStatus(200);
 })
 
 app.post('/logout', function (req, res) {
