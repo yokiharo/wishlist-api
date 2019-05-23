@@ -34,7 +34,8 @@ app.get('/load', session.check, function(req, res) {
 })
 
 app.post('/save', session.check, function(req, res) {
-	// TO DO: SAVE ITEMS TO DB FOR THIS USER
+	console.log(req.body.items);
+	// TO DO: SAVE ITEMS TO DB FOR THIS USER (req.body.items)
 })
 
 app.post('/logout', function (req, res) {
