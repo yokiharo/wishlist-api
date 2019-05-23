@@ -26,20 +26,19 @@ app.get('/auth/google', session.google_login);
 
 app.get('/auth/google/callback', session.google_callback, function(req, res) {
 	req.token = session.generateToken(req.user);
-	// res.json({
-	// 	token: req.token,
-	// 	user: req.user
-	// });
 	res.redirect('https://wishlist-quasar.netlify.com/?token=' + req.token);
-});
+})
 
-app.get('/me', session.check, function(req, res) {
-  res.json(req.user);
-});
+app.get('/load', session.check, function(req, res) {
+  res.json({ user: req.user }); // TO DO: ADD ITEMS FROM DB IN RESPONSE
+})
 
-app.get('/logout', function (req, res) {
+app.post('/save', session.check, function(req, res) {
+	// TO DO: SAVE ITEMS TO DB FOR THIS USER
+})
+
+app.post('/logout', function (req, res) {
 	req.logout();
-	res.redirect('https://wishlist-quasar.netlify.com');
 })
 
 app.listen(process.env.PORT || 3000);
