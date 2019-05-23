@@ -3,9 +3,11 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO, {useNewUrlParser: true, dbName: 'wishlist'});
 
+/* CONFIG */
 require('dotenv').config();
+mongoose.connect(process.env.MONGO, { useNewUrlParser: true, dbName: 'wishlist' });
+mongoose.set('useFindAndModify', false);
 
 /* MODULES */
 const session = require('./session');
@@ -37,7 +39,7 @@ app.get('/load', session.check, async function(req, res) {
 })
 
 app.post('/save', session.check, async function(req, res) {
-	const new_list = new list({ id: req.user.id, items: req.body.items });
+	const new_list = { id: req.user.id, items: req.body.items };
 	await list.findOneAndUpdate({ id: req.user.id }, new_list, { upsert: true });
 	res.sendStatus(200);
 })
