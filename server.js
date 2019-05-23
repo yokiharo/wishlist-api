@@ -14,9 +14,7 @@ const app = express();
 
 /* USES */
 app.use(bodyparser.json());
-app.use(cors({
-	origin: 'https://wishlist-quasar.netlify.com'
-}));
+app.use(cors());
 app.use(session.passport.initialize());
 
 /* MODELS */
