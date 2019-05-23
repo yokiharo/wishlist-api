@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO, {useNewUrlParser: true});
 
 require('dotenv').config();
 
@@ -17,6 +19,9 @@ app.use(cors({
 }));
 app.use(session.passport.initialize());
 
+/* MODELS */
+const list = mongoose.model('list', { id: String, updated: { type: Date, default: Date.now }, items: [] });
+
 /* ROUTES */
 app.get('/', function(req, res) {
 	res.send('Welcome to the Wishlist API! "Make your wishes come true!" - Someone');
@@ -30,11 +35,14 @@ app.get('/auth/google/callback', session.google_callback, function(req, res) {
 })
 
 app.get('/load', session.check, function(req, res) {
-  res.json({ user: req.user }); // TO DO: ADD ITEMS FROM DB IN RESPONSE
+  res.json({ user: req.user, items: list.findOne({ id: req.user.id }) }); // TO DO: ADD ITEMS FROM DB IN RESPONSE
 })
 
 app.post('/save', session.check, function(req, res) {
-	console.log(req.body.items);
+	const new_list = new list({ id: req.user.id, items: req.body.items });
+	list.findOneAndUpdate({ id: req.user.id }, new_list, { upsert: true }).then(function() {
+		res.sendStatus(200);
+	})
 	// TO DO: SAVE ITEMS TO DB FOR THIS USER (req.body.items)
 })
 
