@@ -29,8 +29,6 @@ module.exports = {
   google_login: passport.authenticate('google', { scope: ['profile'] }),
   google_callback: passport.authenticate('google', { failureRedirect: 'https://wishlist-quasar.netlify.com' }),
   generateToken(user) {
-    return jwt.sign({
-      user: user
-    }, process.env.JWT_SECRET);
+    return jwt.sign(user, process.env.JWT_SECRET);
   }
 }
