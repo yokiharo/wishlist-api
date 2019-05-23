@@ -35,7 +35,7 @@ app.get('/auth/google/callback', session.google_callback, function(req, res) {
 })
 
 app.get('/load', session.check, function(req, res) {
-  res.json({ user: req.user, items: list.findOne({ id: req.user.id }) }); // TO DO: ADD ITEMS FROM DB IN RESPONSE
+  res.json({ user: req.user, user_list: list.findOne({ id: req.user.id }) }); // TO DO: ADD ITEMS FROM DB IN RESPONSE
 })
 
 app.post('/save', session.check, function(req, res) {
