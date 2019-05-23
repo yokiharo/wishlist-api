@@ -3,7 +3,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO, {useNewUrlParser: true});
+mongoose.connect(process.env.MONGO, {useNewUrlParser: true, dbName: 'wishlist'});
 
 require('dotenv').config();
 
