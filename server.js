@@ -20,7 +20,7 @@ app.use(cors());
 app.use(session.passport.initialize());
 
 /* MODELS */
-const list = mongoose.model('list', { id: String, updated: { type: Date, default: Date.now }, items: [] });
+const list = mongoose.model('list', { id: String, updated: Date, items: [] });
 
 /* ROUTES */
 app.get('/', function(req, res) {
@@ -39,7 +39,7 @@ app.get('/load', session.check, async function(req, res) {
 })
 
 app.post('/save', session.check, async function(req, res) {
-	const new_list = { id: req.user.id, items: req.body.items };
+	const new_list = { id: req.user.id, items: req.body.items, updated: new Date().toISOString() };
 	await list.findOneAndUpdate({ id: req.user.id }, new_list, { upsert: true });
 	res.sendStatus(200);
 })
