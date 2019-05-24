@@ -7,11 +7,9 @@
 
 # Wishlist API
 
-API for the simple Wishlist app made with [Quasar Framework](https://quasar-framework.org/)!
+API for the simple [Wishlist](https://wishlist-quasar.netlify.com) app made with [Quasar Framework](https://quasar-framework.org/)!
 
-You can try it [here](https://wishlist-quasar.netlify.com).
-
-You can find the app/front-end [here](https://github.com/yokiharo/wishlist).
+You can find the app/front-end repository [here](https://github.com/yokiharo/wishlist).
 
 Feel free to contribute!
 
@@ -21,6 +19,8 @@ Feel free to contribute!
 3. Create a *.env* file with your own secrets so they are caught on `process.env.SECRET` (don't forget to add this file to .gitignore!);
 4. Run `npm run start` to start developing;
 5. Make your changes and create a PR :smiley:
+
+--------------------------------------------
 
 ## Disclaimer
 This app's only purpose is educational - We made it for fun mostly as a way of learning and training [Quasar Framework](https://quasar-framework.org/). The app is provided to you *as is*, considering it is an open-source project and may change over time. If the app performance isn't the best, please keep in mind that every single part of it is being hosted by **100% free** services. The app **does not** store any information from you except in the case of signing in, in which case we store your list items along with your OAuth provider's ID, e.g. Google ID, so you can retrieve them later. The information is stored on a free tier cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). In case of offline use instead of signing in, the app only stores information locally in your browser, using [Quasar Web Storage (LocalStorage)](https://quasar-framework.org/components/web-storage.html).
